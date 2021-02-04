@@ -6,6 +6,7 @@ const postRoutes = require('./server/posts/posts.route');
 const sizesRoutes = require('./server/sizes/sizes.route');
 const favouritesRoutes = require('./server/favourites/favourites.route');
 const commentsRoutes = require('./server/comments/comments.route');
+const citiesRoutes = require('./server/cities/cities.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -13,7 +14,7 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 /** GET /health-check - Check service health */
 router.get('/adem', (req, res) =>
-  res.send('Bacaj')
+  res.send('Success')
 );
 
 // mount user routes at /users
@@ -24,5 +25,6 @@ router.use('/posts', postRoutes);
 router.use('/sizes', sizesRoutes);
 router.use('/favourites', favouritesRoutes);
 router.use('/comments', commentsRoutes);
+router.use('/cities', citiesRoutes);
 
 module.exports = router;
