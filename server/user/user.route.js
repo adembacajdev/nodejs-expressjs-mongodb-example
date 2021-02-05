@@ -11,6 +11,9 @@ router.route('/')
   .get(userCtrl.getAll)
   .post(expressJwt({ secret: config.jwtSecret }), userCtrl.create)
 
+router.route('/upload')
+  .post(userCtrl.uploadProfilePicture)
+
 router.route('/:userId')
   .get(userCtrl.getOne)
   .put(expressJwt({ secret: config.jwtSecret }), userCtrl.updateOne)

@@ -3,6 +3,7 @@ const sha256 = require('crypto-js/sha256');
 const config = require('../../config/config');
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
+const fs = require('fs');
 
 function create(req, res, next) {
   const userModel = new User({
@@ -93,4 +94,40 @@ function deleteOne(req, res, next) {
     })
 }
 
-module.exports = { create, getAll, getOne, updateOne, deleteOne };
+function uploadProfilePicture(req, res, next) {
+
+  User.findOne({ _id: req.body.user_id }).exec().then((data) => {
+    const files = req.files;
+    const file = files['file'];
+    const filename = `${data._id}.jpg`;
+
+    fs.writeFile(`${config.basePath}/public/profile/${filename}`, file.data, function (err) {
+      if (err) {
+        return res.json({
+          success: false,
+          message: "Problem me ngarkim të fotos."
+        })
+      }
+
+      var photo = `${config.domain}/profile/${filename}`
+
+
+      User.findOneAndUpdate({ _id: data._id }, { $set: { profile_picture: photo } }, { new: true }).select("_id profile_picture email name surname shop_name").then(savedUser => {
+        res.json({
+          success: true,
+          data: savedUser
+        })
+      }).catch(e => {
+        res.json({
+          success: false,
+          message: "Problem me ngarkim të fotos."
+        })
+      })
+    });
+  }).catch(e => {
+    const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
+    next(err);
+  })
+}
+
+module.exports = { create, getAll, getOne, updateOne, deleteOne, uploadProfilePicture };

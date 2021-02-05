@@ -13,6 +13,7 @@ const winstonInstance = require('./winston');
 const routes = require('../index.route');
 const config = require('./config');
 const APIError = require('../server/helpers/APIError');
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
@@ -30,6 +31,15 @@ app.use(methodOverride());
 
 // secure apps by setting various HTTP headers
 app.use(helmet());
+
+//file-upload
+app.use(express.static('public'));
+app.use(require('body-parser').urlencoded({ extended: true, limit: '100mb', parameterLimit: 1000000 }));
+app.use(
+	fileUpload({
+		limits: { fileSize: 100 * 1024 * 1024 }
+	})
+);
 
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());

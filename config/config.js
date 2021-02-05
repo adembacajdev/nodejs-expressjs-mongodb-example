@@ -40,6 +40,8 @@ const config = {
     port: envVars.MONGO_PORT
   },
   salt: envVars.PASSWORD_SALT,
+  basePath: __dirname + '/..',
+  domain: 'http://localhost:5000'
 };
 
 module.exports = config;
