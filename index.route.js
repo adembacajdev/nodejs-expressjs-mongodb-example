@@ -7,6 +7,7 @@ const sizesRoutes = require('./server/sizes/sizes.route');
 const favouritesRoutes = require('./server/favourites/favourites.route');
 const commentsRoutes = require('./server/comments/comments.route');
 const citiesRoutes = require('./server/cities/cities.route');
+const slidersRoutes = require('./server/sliders/sliders.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -26,5 +27,6 @@ router.use('/sizes', sizesRoutes);
 router.use('/favourites', favouritesRoutes);
 router.use('/comments', commentsRoutes);
 router.use('/cities', citiesRoutes);
+router.use('/sliders', slidersRoutes);
 
 module.exports = router;

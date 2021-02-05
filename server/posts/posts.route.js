@@ -10,12 +10,12 @@ const router = express.Router(); // eslint-disable-line new-cap
 router.use(expressJwt({ secret: config.jwtSecret }))
 
 router.route('/')
-    .post(postCtrl.createOne)
+    .post(expressJwt({ secret: config.jwtSecret }), postCtrl.createOne)
     .get(postCtrl.getAll)
 
 router.route('/:postId')
     .get(postCtrl.getOne)
-    .put(postCtrl.updateOne)
-    .delete(postCtrl.deleteOne)
+    .put(expressJwt({ secret: config.jwtSecret }), postCtrl.updateOne)
+    .delete(expressJwt({ secret: config.jwtSecret }), postCtrl.deleteOne)
 
 module.exports = router;

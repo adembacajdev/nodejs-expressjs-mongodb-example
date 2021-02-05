@@ -7,15 +7,13 @@ const config = require('../../config/config');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-router.use(expressJwt({ secret: config.jwtSecret }))
-
 router.route('/')
   .get(userCtrl.getAll)
-  .post(userCtrl.create)
+  .post(expressJwt({ secret: config.jwtSecret }), userCtrl.create)
 
 router.route('/:userId')
   .get(userCtrl.getOne)
-  .put(userCtrl.updateOne)
-  .delete(userCtrl.deleteOne)
+  .put(expressJwt({ secret: config.jwtSecret }), userCtrl.updateOne)
+  .delete(expressJwt({ secret: config.jwtSecret }), userCtrl.deleteOne)
 
 module.exports = router;
