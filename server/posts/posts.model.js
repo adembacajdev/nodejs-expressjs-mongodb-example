@@ -13,6 +13,10 @@ const PostSchema = new mongoose.Schema({
     required: false,
     default: false
   },
+  rent_price: {
+    type: Number,
+    required: false,
+  },
   phone_number: {
     type: Number,
     required: false,
@@ -46,7 +50,7 @@ const PostSchema = new mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
-    required: true
+    required: false
   },
   sizes: {
     type: [mongoose.Schema.Types.ObjectId],

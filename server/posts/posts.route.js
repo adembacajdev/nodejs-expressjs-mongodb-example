@@ -13,6 +13,15 @@ router.route('/')
     .post(expressJwt({ secret: config.jwtSecret }), postCtrl.createOne)
     .get(postCtrl.getAll)
 
+router.route('/discounts')
+    .get(postCtrl.getDiscounts)
+
+router.route('/new-arrives')
+    .get(postCtrl.getNewArrives)
+
+router.route('/for-rent')
+    .get(postCtrl.getForRent)
+
 router.route('/:postId')
     .get(postCtrl.getOne)
     .put(expressJwt({ secret: config.jwtSecret }), postCtrl.updateOne)

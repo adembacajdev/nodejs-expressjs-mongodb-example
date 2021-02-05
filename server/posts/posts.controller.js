@@ -6,6 +6,7 @@ function createOne(req, res, next) {
   const postModel = new Post({
     title: req.body.title,
     for_rent: req.body.for_rent,
+    rent_price: req.body.rent_price,
     phone_number: req.body.phone_number,
     shop_address: req.body.shop_address,
     shop_name: req.body.shop_name,
@@ -32,6 +33,7 @@ function updateOne(req, res, next) {
   Post.findOne({ _id: req.params.postId }).exec().then((data) => {
     data.title = req.body.title ? req.body.title : data.title;
     data.for_rent = req.body.for_rent ? req.body.for_rent : data.for_rent;
+    data.rent_price = req.body.rent_price ? req.body.rent_price : data.rent_price;
     data.phone_number = req.body.phone_number ? req.body.phone_number : data.phone_number;
     data.shop_address = req.body.shop_address ? req.body.shop_address : data.shop_address;
     data.shop_name = req.body.shop_name ? req.body.shop_name : data.shop_name;
@@ -64,7 +66,7 @@ function deleteOne(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  Post.find().select('_id title description price images for_rent discount sizes').lean().exec().then((data) => {
+  Post.find().select('_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -74,7 +76,7 @@ function getAll(req, res, next) {
 }
 
 function getOne(req, res, next) {
-  Category.findOne({ _id: req.params.categoryId }).select('_id title for_rent phone_number shop_address shop_name discount discount_from discount_to price category sizes createdAt images').lean().exec().then((data) => {
+  Category.findOne({ _id: req.params.categoryId }).select('_id title for_rent rent_price phone_number shop_address shop_name discount discount_from discount_to price category sizes createdAt images').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -83,4 +85,34 @@ function getOne(req, res, next) {
     })
 }
 
-module.exports = { createOne, updateOne, deleteOne, getAll, getOne };
+function getDiscounts(req, res, next) {
+  Post.find({ discount: true }).select('_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+    res.json({ success: true, data })
+  })
+    .catch(e => {
+      const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
+      next(err);
+    })
+}
+
+function getNewArrives(req, res, next) {
+  Post.find().sort({ _id: -1 }).limit(6).select('_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+    res.json({ success: true, data })
+  })
+    .catch(e => {
+      const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
+      next(err);
+    })
+}
+
+function getForRent(req, res, next) {
+  Post.find({ for_rent: true }).select('_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+    res.json({ success: true, data })
+  })
+    .catch(e => {
+      const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
+      next(err);
+    })
+}
+
+module.exports = { createOne, updateOne, deleteOne, getAll, getOne, getDiscounts, getNewArrives, getForRent };
