@@ -87,6 +87,13 @@
                 "responses": {
                     "405": {
                         "description": "Invalid input"
+                    },
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/login/success"
+                        }
                     }
                 }
             }
@@ -729,6 +736,69 @@
                 }
             }
         },
+        "/posts/discounts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "GET Discount Posts",
+                "description": "",
+                "operationId": "getDiscountPosts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/posts/new-arrives": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "GET New Arrives Posts",
+                "description": "",
+                "operationId": "getNewArrivesPosts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/posts/for-rent": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "GET Rent Posts",
+                "description": "",
+                "operationId": "getRentPosts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
         "/posts/{postId}": {
             "get": {
                 "tags": [
@@ -1289,6 +1359,34 @@
             },
             "xml": {
                 "name": "login"
+            },
+            "success": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "token": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "surname": {
+                                "type": "string"
+                            },
+                            "profile_picture": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
             }
         },
         "category": {

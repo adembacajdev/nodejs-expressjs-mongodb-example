@@ -116,7 +116,6 @@ function getForRent(req, res, next) {
 }
 
 function uploadImages(req, res, next) {
-
   Post.findOne({ _id: req.body.post_id }).exec().then((data) => {
     const files = req.files;
     const file = files['file'];
