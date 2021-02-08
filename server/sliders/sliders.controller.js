@@ -7,6 +7,7 @@ function createOne(req, res, next) {
     shop_name: req.body.shop_name,
     shop_description: req.body.shop_description,
     shop_image: req.body.shop_image,
+    shop_id: req.body.shop_id,
     expired_date: req.body.expired_date
   })
 
@@ -31,6 +32,7 @@ function updateOne(req, res, next) {
     shop_name = req.body.shop_name ? req.body.shop_name : data.shop_name;
     shop_description = req.body.shop_description ? req.body.shop_description : data.shop_description;
     shop_image = req.body.shop_image ? req.body.shop_image : data.shop_name;
+    shop_id = req.body.shop_id ? req.body.shop_id : data.shop_id;
     expired_date = req.body.expired_date ? req.body.expired_date : data.expired_date;
     data.save()
       .then((saved) => {
@@ -54,7 +56,7 @@ function deleteOne(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  Slider.find().select('_id shop_name shop_description shop_image expired_date createdAt').lean().exec().then((data) => {
+  Slider.find().select('_id shop_name shop_description shop_image expired_date shop_id createdAt').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -64,7 +66,7 @@ function getAll(req, res, next) {
 }
 
 function getOne(req, res, next) {
-  Slider.findOne({ _id: req.params.sliderId }).select('_id shop_name shop_description shop_image expired_date createdAt').lean().exec().then((data) => {
+  Slider.findOne({ _id: req.params.sliderId }).select('_id shop_name shop_description shop_image expired_date shop_id createdAt').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {

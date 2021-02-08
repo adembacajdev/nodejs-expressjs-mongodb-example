@@ -99,7 +99,7 @@ function uploadProfilePicture(req, res, next) {
   User.findOne({ _id: req.body.user_id }).exec().then((data) => {
     const files = req.files;
     const file = files['file'];
-    const filename = `${data._id}.jpg`;
+    const filename = `${data._id}.png`;
 
     fs.writeFile(`${config.basePath}/public/profile/${filename}`, file.data, function (err) {
       if (err) {
@@ -109,7 +109,7 @@ function uploadProfilePicture(req, res, next) {
         })
       }
 
-      var photo = `${config.domain}/profile/${filename}`
+      var photo = `${config.domain}/profile/${filename}`;
 
 
       User.findOneAndUpdate({ _id: data._id }, { $set: { profile_picture: photo } }, { new: true }).select("_id profile_picture email name surname shop_name").then(savedUser => {

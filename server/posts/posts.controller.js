@@ -115,4 +115,37 @@ function getForRent(req, res, next) {
     })
 }
 
-module.exports = { createOne, updateOne, deleteOne, getAll, getOne, getDiscounts, getNewArrives, getForRent };
+function uploadImages(req, res, next) {
+
+  Post.findOne({ _id: req.body.post_id }).exec().then((data) => {
+    const files = req.files;
+    const file = files['file'];
+    const fileLinks = '';
+
+    file.forEach(file => {
+      const filename = `${data._id}${file.name}.jpg`;
+      fs.writeFile(`${config.basePath}/public/profile/${filename}`, file.data, function (err) {
+        if (err) {
+          return res.json({
+            success: false,
+            message: "Problem me ngarkim të fotos."
+          })
+        }
+
+        var photo = `${config.domain}/profile/${filename}`;
+        console.log('====PHOTO====', photo)
+        if (fileLinks === '') {
+          fileLinks = photo;
+        } else {
+          fileLinks = `${fileLinks},${photo}`
+        }
+      });
+    })
+    res.json({ success: true, data: fileLinks })
+  }).catch(e => {
+    const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
+    next(err);
+  })
+}
+
+module.exports = { createOne, updateOne, deleteOne, getAll, getOne, getDiscounts, getNewArrives, getForRent, uploadImages };

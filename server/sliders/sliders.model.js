@@ -16,6 +16,11 @@ const SliderSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  shop_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
   expired_date: {
     type: Date,
     required: true

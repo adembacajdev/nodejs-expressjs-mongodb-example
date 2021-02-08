@@ -7,8 +7,6 @@ const config = require('../../config/config');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-router.use(expressJwt({ secret: config.jwtSecret }))
-
 router.route('/')
     .post(expressJwt({ secret: config.jwtSecret }), postCtrl.createOne)
     .get(postCtrl.getAll)
