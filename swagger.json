@@ -1,0 +1,1570 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "NuseAPI v1.0",
+        "description": "NuseApp API version 1.0",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:5000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Categories",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Cities",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Comments",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Favourites",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Posts",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Sizes",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Sliders",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user",
+                "description": "",
+                "operationId": "login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "GET all Categories",
+                "description": "",
+                "operationId": "getAllCategories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "POST one Category",
+                "description": "",
+                "operationId": "postCategory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Category object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/category/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/categories/{categoryId}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "GET one Category",
+                "description": "",
+                "operationId": "getOneCategories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "ID of category to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update one Category",
+                "description": "",
+                "operationId": "putOneCategories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "ID of category to return",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Category object that needs to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/category/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "delete": {
+                "security": {
+                    "Bearer": []
+                },
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "DELETE one Category",
+                "description": "",
+                "operationId": "deleteOneCategories",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "ID of category to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/cities": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "GET all Cities",
+                "description": "",
+                "operationId": "getAllCities",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "POST one City",
+                "description": "",
+                "operationId": "postCity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "City object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/city/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/cities/{cityId}": {
+            "get": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "GET one City",
+                "description": "",
+                "operationId": "getOneCity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "cityId",
+                        "in": "path",
+                        "description": "ID of city to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "Update one City",
+                "description": "",
+                "operationId": "putOneCity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "cityId",
+                        "in": "path",
+                        "description": "ID of category to return",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "City object that needs to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/city/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cities"
+                ],
+                "summary": "DELETE one City",
+                "description": "",
+                "operationId": "deleteOneCity",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "cityId",
+                        "in": "path",
+                        "description": "ID of city to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/comments": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "GET all your Comments",
+                "description": "",
+                "operationId": "getAllComments",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "POST one Comment",
+                "description": "",
+                "operationId": "postComment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Comment object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/comment/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/comments/{commentId}": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "GET one Comment",
+                "description": "",
+                "operationId": "getOneComment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "commentId",
+                        "in": "path",
+                        "description": "ID of comment to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Update one Comment",
+                "description": "",
+                "operationId": "putOneComment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "commentId",
+                        "in": "path",
+                        "description": "ID of comment to return",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Comment object that needs to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/comment/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "DELETE one Comment",
+                "description": "",
+                "operationId": "deleteOneComment",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "commentId",
+                        "in": "path",
+                        "description": "ID of comment to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/favourites": {
+            "get": {
+                "tags": [
+                    "Favourites"
+                ],
+                "summary": "GET all your Favourites",
+                "description": "",
+                "operationId": "getAllFavourites",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Favourites"
+                ],
+                "summary": "POST one Favourite",
+                "description": "",
+                "operationId": "postFavourite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Favourite object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/favourites/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/favourites/{favouriteId}": {
+            "get": {
+                "tags": [
+                    "Favourites"
+                ],
+                "summary": "GET one Favourite",
+                "description": "",
+                "operationId": "getoneFavourite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "favouriteId",
+                        "in": "path",
+                        "description": "ID of favourite to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Favourites"
+                ],
+                "summary": "Update one Favourite",
+                "description": "",
+                "operationId": "putOneFavourite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "favouriteId",
+                        "in": "path",
+                        "description": "ID of favourite to return",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Favourite object that needs to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/favourites/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Favourites"
+                ],
+                "summary": "DELETE one Favourite",
+                "description": "",
+                "operationId": "deleteOneFavourite",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "favouriteId",
+                        "in": "path",
+                        "description": "ID of favourite to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "GET all Posts",
+                "description": "",
+                "operationId": "getAllPosts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "POST one Post",
+                "description": "",
+                "operationId": "postOnePost",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Post object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/posts/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/posts/{postId}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "GET one Post",
+                "description": "",
+                "operationId": "getOnePost",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID of post to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Update one Post",
+                "description": "",
+                "operationId": "putOnePost",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID of post to return",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Post object that needs to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/posts/put"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "DELETE one Post",
+                "description": "",
+                "operationId": "deleteOnePost",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID of post to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/sizes": {
+            "get": {
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "GET all Sizes",
+                "description": "",
+                "operationId": "getAllSizes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "POST one Size",
+                "description": "",
+                "operationId": "postSize",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Size object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sizes/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/sizes/{sizeId}": {
+            "get": {
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "GET one Size",
+                "description": "",
+                "operationId": "getOneSize",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sizeId",
+                        "in": "path",
+                        "description": "ID of size to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "Update one Size",
+                "description": "",
+                "operationId": "putOneSize",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sizeId",
+                        "in": "path",
+                        "description": "ID of size to return",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Size object that needs to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sizes/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Sizes"
+                ],
+                "summary": "DELETE one Size",
+                "description": "",
+                "operationId": "deleteOneSize",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sizeId",
+                        "in": "path",
+                        "description": "ID of size to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/sliders": {
+            "get": {
+                "tags": [
+                    "Sliders"
+                ],
+                "summary": "GET all Sliders",
+                "description": "",
+                "operationId": "getAllSliders",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Sliders"
+                ],
+                "summary": "POST one Slider",
+                "description": "",
+                "operationId": "postSlider",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Slider object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sliders/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/sliders/{sliderId}": {
+            "get": {
+                "tags": [
+                    "Sliders"
+                ],
+                "summary": "GET one Slider",
+                "description": "",
+                "operationId": "getOneSlider",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sliderId",
+                        "in": "path",
+                        "description": "ID of slider to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Sliders"
+                ],
+                "summary": "Update one Slider",
+                "description": "",
+                "operationId": "putOneSlider",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sliderId",
+                        "in": "path",
+                        "description": "ID of slider to return",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Slider object that needs to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sliders/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Sliders"
+                ],
+                "summary": "DELETE one Slider",
+                "description": "",
+                "operationId": "deleteOneSlider",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sliderId",
+                        "in": "path",
+                        "description": "ID of slider to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "GET all Users",
+                "description": "",
+                "operationId": "getAllUsers",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "POST one User",
+                "description": "",
+                "operationId": "postUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/users/{userId}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "GET one User",
+                "description": "",
+                "operationId": "getOneUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of user to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update one User",
+                "description": "",
+                "operationId": "putOneUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of user to return",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that needs to update.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users/post"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "DELETE one User",
+                "description": "",
+                "operationId": "deleteOneUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of user to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "scheme": "bearer"
+        }
+    },
+    "security": [
+        {
+            "Bearer": []
+        }
+    ],
+    "definitions": {
+        "login": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "login"
+            }
+        },
+        "category": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "category_name": {
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "category/post"
+                }
+            }
+        },
+        "city": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "city_name": {
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "city/post"
+                }
+            }
+        },
+        "comment": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string"
+                    },
+                    "post_id": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "comment": {
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "city/post"
+                }
+            }
+        },
+        "favourite": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "user_id": {
+                        "type": "string"
+                    },
+                    "post_id": {
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "city/post"
+                }
+            }
+        },
+        "posts": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "for_rent": {
+                        "type": "boolean"
+                    },
+                    "rent_price": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "phone_number": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "shop_address": {
+                        "type": "string"
+                    },
+                    "shop_name": {
+                        "type": "string"
+                    },
+                    "discount": {
+                        "type": "boolean"
+                    },
+                    "discount_from": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "discount_to": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "price": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "sizes": {
+                        "type": "string"
+                    },
+                    "images": {
+                        "type": "array",
+                        "xml": {
+                            "name": "images",
+                            "wrapped": true
+                        },
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "xml": {
+                    "name": "post/post"
+                }
+            },
+            "put": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "for_rent": {
+                        "type": "boolean"
+                    },
+                    "rent_price": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "phone_number": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "shop_address": {
+                        "type": "string"
+                    },
+                    "shop_name": {
+                        "type": "string"
+                    },
+                    "discount": {
+                        "type": "boolean"
+                    },
+                    "discount_from": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "discount_to": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "price": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "sizes": {
+                        "type": "string"
+                    },
+                    "images": {
+                        "type": "array",
+                        "xml": {
+                            "name": "images",
+                            "wrapped": true
+                        },
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "xml": {
+                    "name": "post/put"
+                }
+            }
+        },
+        "sizes": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "size_name": {
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "city/post"
+                }
+            }
+        },
+        "sliders": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "shop_name": {
+                        "type": "string"
+                    },
+                    "shop_description": {
+                        "type": "string"
+                    },
+                    "shop_image": {
+                        "type": "string"
+                    },
+                    "shop_id": {
+                        "type": "string"
+                    },
+                    "expired_date": {
+                        "type": "integer",
+                        "format": "date-time"
+                    }
+                },
+                "xml": {
+                    "name": "city/post"
+                }
+            }
+        },
+        "users": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "surname": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "birthday": {
+                        "type": "integer",
+                        "format": "date-time"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "profile_picture": {
+                        "type": "string"
+                    },
+                    "phone_number": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "facebook": {
+                        "type": "string"
+                    },
+                    "instagram": {
+                        "type": "string"
+                    },
+                    "shop_address": {
+                        "type": "string"
+                    },
+                    "shop_description": {
+                        "type": "string"
+                    },
+                    "user_type": {
+                        "type": "integer"
+                    }
+                },
+                "xml": {
+                    "name": "city/post"
+                }
+            }
+        }
+    }
+}

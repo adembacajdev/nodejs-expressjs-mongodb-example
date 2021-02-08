@@ -8,10 +8,14 @@ const favouritesRoutes = require('./server/favourites/favourites.route');
 const commentsRoutes = require('./server/comments/comments.route');
 const citiesRoutes = require('./server/cities/cities.route');
 const slidersRoutes = require('./server/sliders/sliders.route');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
 // TODO: use glob to match *.route files
+
+router.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /** GET /health-check - Check service health */
 router.get('/adem', (req, res) =>

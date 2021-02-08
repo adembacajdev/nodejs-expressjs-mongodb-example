@@ -16,7 +16,8 @@ const UserSchema = new mongoose.Schema({
     required: false,
   },
   city: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'City',
     required: false,
   },
   birthday: {
