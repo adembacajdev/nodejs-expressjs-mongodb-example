@@ -539,6 +539,66 @@
                 }
             }
         },
+        "/comments/post/{postId}": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "GET Comments per Post",
+                "description": "",
+                "operationId": "getCommentsPerPost",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "postId",
+                        "in": "path",
+                        "description": "ID of post to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/comments/user/{userId}": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "GET Comments per User",
+                "description": "",
+                "operationId": "getCommentsPerUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of user to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
         "/favourites": {
             "get": {
                 "tags": [
@@ -674,6 +734,36 @@
                         "name": "favouriteId",
                         "in": "path",
                         "description": "ID of favourite to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/favourites/user/{userId}": {
+            "get": {
+                "tags": [
+                    "Favourites"
+                ],
+                "summary": "GET Favourites per User",
+                "description": "",
+                "operationId": "getFavouritesPerUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of user to return",
                         "required": true,
                         "type": "string"
                     }
@@ -883,6 +973,36 @@
                         "name": "postId",
                         "in": "path",
                         "description": "ID of post to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/posts/user/{userId}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "GET Posts per User",
+                "description": "",
+                "operationId": "getPostsPerUser",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "ID of user to return",
                         "required": true,
                         "type": "string"
                     }

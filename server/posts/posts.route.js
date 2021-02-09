@@ -20,6 +20,9 @@ router.route('/new-arrives')
 router.route('/for-rent')
     .get(postCtrl.getForRent)
 
+router.route('/user/:userId')
+    .get(expressJwt({ secret: config.jwtSecret }), postCtrl.getAllMyPosts)
+
 router.route('/:postId')
     .get(postCtrl.getOne)
     .put(expressJwt({ secret: config.jwtSecret }), postCtrl.updateOne)

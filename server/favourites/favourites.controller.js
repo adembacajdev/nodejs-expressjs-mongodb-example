@@ -44,7 +44,7 @@ function deleteOne(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  Favourite.find().select('_id post_id user_id').lean().exec().then((data) => {
+  Favourite.find({ user_id: req.params.userId }).select('_id post_id user_id').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {

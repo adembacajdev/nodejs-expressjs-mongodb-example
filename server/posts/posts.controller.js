@@ -16,7 +16,8 @@ function createOne(req, res, next) {
     price: req.body.price,
     category: req.body.category,
     sizes: req.body.sizes,
-    images: req.body.images
+    images: req.body.images,
+    user_id: req.body.user_id
   })
 
   postModel.save()
@@ -66,7 +67,17 @@ function deleteOne(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  Post.find().select('_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find().select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+    res.json({ success: true, data })
+  })
+    .catch(e => {
+      const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
+      next(err);
+    })
+}
+
+function getAllMyPosts(req, res, next) {
+  Post.find({ user_id: req.params.userId }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -76,7 +87,7 @@ function getAll(req, res, next) {
 }
 
 function getOne(req, res, next) {
-  Category.findOne({ _id: req.params.categoryId }).select('_id title for_rent rent_price phone_number shop_address shop_name discount discount_from discount_to price category sizes createdAt images').lean().exec().then((data) => {
+  Category.findOne({ _id: req.params.categoryId }).select('_id user_id title for_rent rent_price phone_number shop_address shop_name discount discount_from discount_to price category sizes createdAt images').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -86,7 +97,7 @@ function getOne(req, res, next) {
 }
 
 function getDiscounts(req, res, next) {
-  Post.find({ discount: true }).select('_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find({ discount: true }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -96,7 +107,7 @@ function getDiscounts(req, res, next) {
 }
 
 function getNewArrives(req, res, next) {
-  Post.find().sort({ _id: -1 }).limit(6).select('_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find().sort({ _id: -1 }).limit(6).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -106,7 +117,7 @@ function getNewArrives(req, res, next) {
 }
 
 function getForRent(req, res, next) {
-  Post.find({ for_rent: true }).select('_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find({ for_rent: true }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -147,4 +158,4 @@ function uploadImages(req, res, next) {
   })
 }
 
-module.exports = { createOne, updateOne, deleteOne, getAll, getOne, getDiscounts, getNewArrives, getForRent, uploadImages };
+module.exports = { createOne, updateOne, deleteOne, getAll, getOne, getDiscounts, getNewArrives, getForRent, uploadImages, getAllMyPosts };

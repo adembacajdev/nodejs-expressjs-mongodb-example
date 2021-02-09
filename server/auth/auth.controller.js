@@ -29,7 +29,8 @@ function login(req, res, next) {
           email: email,
           name: userData[0].name,
           surname: userData[0].surname,
-          profile_picture: userData[0].profile_picture
+          profile_picture: userData[0].profile_picture,
+          user_type: userData[0].user_type
         }
       });
 

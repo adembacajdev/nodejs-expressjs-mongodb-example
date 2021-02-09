@@ -11,6 +11,8 @@ router.use(expressJwt({ secret: config.jwtSecret }))
 
 router.route('/')
     .post(favCtrl.createOne)
+
+router.route('/user/:userId')
     .get(favCtrl.getAll)
 
 router.route('/:favouriteId')

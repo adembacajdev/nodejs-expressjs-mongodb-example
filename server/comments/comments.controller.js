@@ -47,8 +47,18 @@ function deleteOne(req, res, next) {
     })
 }
 
-function getAll(req, res, next) {
-  Comment.find().select('_id post_id user_id rating comment').lean().exec().then((data) => {
+function getAllPerUser(req, res, next) {
+  Comment.find({ user_id: req.params.userId }).select('_id post_id user_id rating comment').lean().exec().then((data) => {
+    res.json({ success: true, data })
+  })
+    .catch(e => {
+      const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
+      next(err);
+    })
+}
+
+function getAllPerPost(req, res, next) {
+  Comment.find({ post_id: req.params.postId }).select('_id post_id user_id rating comment').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -67,4 +77,4 @@ function getOne(req, res, next) {
     })
 }
 
-module.exports = { createOne, updateOne, deleteOne, getAll, getOne };
+module.exports = { createOne, updateOne, deleteOne, getAllPerPost, getAllPerUser, getOne };

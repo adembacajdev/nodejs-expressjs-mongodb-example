@@ -8,8 +8,13 @@ const config = require('../../config/config');
 const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/')
-    .post(expressJwt({ secret: config.jwtSecret }), commentCtrl.createOne)
-    .get(commentCtrl.getAll)
+    .post(expressJwt({ secret: config.jwtSecret }), commentCtrl.createOne);
+
+router.route('post/:postId')
+    .get(expressJwt({ secret: config.jwtSecret }), commentCtrl.getAllPerPost);
+
+router.route('user/:userId')
+    .get(expressJwt({ secret: config.jwtSecret }), commentCtrl.getAllPerUser);
 
 router.route('/:commentId')
     .get(expressJwt({ secret: config.jwtSecret }), commentCtrl.getOne)
