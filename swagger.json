@@ -216,9 +216,6 @@
                 }
             },
             "delete": {
-                "security": {
-                    "Bearer": []
-                },
                 "tags": [
                     "Categories"
                 ],
@@ -815,7 +812,7 @@
                         "description": "Post object that needs to be added to the store",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/posts/post"
+                            "$ref": "#/definitions/posts/posting"
                         }
                     }
                 ],
@@ -1003,6 +1000,36 @@
                         "name": "userId",
                         "in": "path",
                         "description": "ID of user to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/posts/category/{categoryId}": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "GET Posts per Category",
+                "description": "",
+                "operationId": "getPostsPerCategory",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "ID of category to return",
                         "required": true,
                         "type": "string"
                     }
@@ -1575,7 +1602,7 @@
             }
         },
         "posts": {
-            "post": {
+            "posting": {
                 "type": "object",
                 "properties": {
                     "title": {

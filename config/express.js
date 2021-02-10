@@ -14,6 +14,7 @@ const routes = require('../index.route');
 const config = require('./config');
 const APIError = require('../server/helpers/APIError');
 const fileUpload = require('express-fileupload');
+const socketController = require('../server/socket/socket.controller');
 
 const app = express();
 
@@ -36,9 +37,9 @@ app.use(helmet());
 app.use(express.static('public'));
 app.use(require('body-parser').urlencoded({ extended: true, limit: '100mb', parameterLimit: 1000000 }));
 app.use(
-	fileUpload({
-		limits: { fileSize: 100 * 1024 * 1024 }
-	})
+  fileUpload({
+    limits: { fileSize: 100 * 1024 * 1024 }
+  })
 );
 
 // enable CORS - Cross Origin Resource Sharing
@@ -93,5 +94,25 @@ app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
     stack: config.env === 'development' ? err.stack : {}
   })
 );
+
+//Sockets
+var io = require('socket.io')(
+  app.listen(config.port, '127.0.0.1', () => {
+    console.info(`server started on port ${config.port} (${config.env})`); // eslint-disable-line no-console
+  })
+);
+
+socketController.setGlobalSocket(io);
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+// console.log("IO", io)
+io.on('connection', function (socket) {
+  socketController.socketConnect(socket);
+  socket.on('disconnect', (reason) => {
+    socketController.socketDisconnect(socket, reason);
+  });
+});
 
 module.exports = app;

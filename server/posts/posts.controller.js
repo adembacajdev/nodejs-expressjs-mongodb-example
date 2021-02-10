@@ -76,6 +76,16 @@ function getAll(req, res, next) {
     })
 }
 
+function getAllPostsByCategory(req, res, next) {
+  Post.find({ category: req.params.categoryId }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+    res.json({ success: true, data })
+  })
+    .catch(e => {
+      const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
+      next(err);
+    })
+}
+
 function getAllMyPosts(req, res, next) {
   Post.find({ user_id: req.params.userId }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
     res.json({ success: true, data })
@@ -158,4 +168,4 @@ function uploadImages(req, res, next) {
   })
 }
 
-module.exports = { createOne, updateOne, deleteOne, getAll, getOne, getDiscounts, getNewArrives, getForRent, uploadImages, getAllMyPosts };
+module.exports = { createOne, updateOne, deleteOne, getAll, getOne, getDiscounts, getNewArrives, getForRent, uploadImages, getAllMyPosts, getAllPostsByCategory };

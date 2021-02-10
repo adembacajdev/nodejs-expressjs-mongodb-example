@@ -23,6 +23,9 @@ router.route('/for-rent')
 router.route('/user/:userId')
     .get(expressJwt({ secret: config.jwtSecret }), postCtrl.getAllMyPosts)
 
+router.route('/category/:categoryId')
+    .get(postCtrl.getAllPostsByCategory)
+
 router.route('/:postId')
     .get(postCtrl.getOne)
     .put(expressJwt({ secret: config.jwtSecret }), postCtrl.updateOne)

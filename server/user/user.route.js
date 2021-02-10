@@ -9,7 +9,7 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/')
   .get(userCtrl.getAll)
-  .post(expressJwt({ secret: config.jwtSecret }), userCtrl.create)
+  .post(userCtrl.create)
 
 router.route('/upload')
   .post(userCtrl.uploadProfilePicture)
