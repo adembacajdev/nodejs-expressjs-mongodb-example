@@ -19,7 +19,8 @@ function create(req, res, next) {
     instagram: req.body.instagram,
     shop_address: req.body.shop_address,
     shop_description: req.body.shop_description,
-    user_type: req.body.user_type
+    user_type: req.body.user_type,
+    shop_name: req.body.shop_name
   });
 
   User.find({ email: req.body.email }).lean().exec().then((user) => {
@@ -42,7 +43,7 @@ function create(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  User.find().select('_id user_type name surname city email phone_number').lean().exec().then((data) => {
+  User.find().select('_id shop_name user_type name surname city email phone_number').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -52,7 +53,7 @@ function getAll(req, res, next) {
 }
 
 function getOne(req, res, next) {
-  User.findOne({ _id: req.params.userId }).select('_id user_type name surname city email phone_number facebook instagram birthday createdAt profile_picture shop_address shop_description').lean().exec().then((data) => {
+  User.findOne({ _id: req.params.userId }).select('_id shop_name user_type name surname city email phone_number facebook instagram birthday createdAt profile_picture shop_address shop_description').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -64,6 +65,7 @@ function getOne(req, res, next) {
 function updateOne(req, res, next) {
   User.findOne({ _id: req.params.userId }).exec().then((data) => {
     data.name = req.body.name ? req.body.name : data.name;
+    data.shop_name = req.body.shop_name ? req.body.shop_name : data.shop_name;
     data.surname = req.body.surname ? req.body.surname : data.surname;
     data.city = req.body.city ? req.body.city : data.city;
     data.birthday = req.body.birthday ? req.body.birthday : data.birthday;

@@ -8,6 +8,8 @@ const favouritesRoutes = require('./server/favourites/favourites.route');
 const commentsRoutes = require('./server/comments/comments.route');
 const citiesRoutes = require('./server/cities/cities.route');
 const slidersRoutes = require('./server/sliders/sliders.route');
+const testRoutes = require('./server/testImages/test.route');
+//Swagger
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -32,5 +34,6 @@ router.use('/favourites', favouritesRoutes);
 router.use('/comments', commentsRoutes);
 router.use('/cities', citiesRoutes);
 router.use('/sliders', slidersRoutes);
+router.use('/test', testRoutes);
 
 module.exports = router;

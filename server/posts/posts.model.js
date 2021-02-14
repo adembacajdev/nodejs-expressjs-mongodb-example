@@ -8,6 +8,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  description: {
+    type: String,
+    required: false
+  },
   for_rent: {
     type: Boolean,
     required: false,
@@ -62,14 +66,14 @@ const PostSchema = new mongoose.Schema({
     default: Date.now
   },
   images: {
-    type: [String],
+    type: [{ photo: String }],
     required: false,
     default: []
   },
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: false
   }
 });
 

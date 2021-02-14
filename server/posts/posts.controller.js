@@ -1,10 +1,14 @@
 const Post = require('./posts.model');
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
+const fs = require('fs');
+const config = require('../../config/config');
+const { isArray } = require('util');
 
 function createOne(req, res, next) {
   const postModel = new Post({
     title: req.body.title,
+    description: req.body.description,
     for_rent: req.body.for_rent,
     rent_price: req.body.rent_price,
     phone_number: req.body.phone_number,
@@ -33,6 +37,7 @@ function createOne(req, res, next) {
 function updateOne(req, res, next) {
   Post.findOne({ _id: req.params.postId }).exec().then((data) => {
     data.title = req.body.title ? req.body.title : data.title;
+    data.description = req.body.description ? req.body.description : data.description;
     data.for_rent = req.body.for_rent ? req.body.for_rent : data.for_rent;
     data.rent_price = req.body.rent_price ? req.body.rent_price : data.rent_price;
     data.phone_number = req.body.phone_number ? req.body.phone_number : data.phone_number;
@@ -97,7 +102,7 @@ function getAllMyPosts(req, res, next) {
 }
 
 function getOne(req, res, next) {
-  Category.findOne({ _id: req.params.categoryId }).select('_id user_id title for_rent rent_price phone_number shop_address shop_name discount discount_from discount_to price category sizes createdAt images').lean().exec().then((data) => {
+  Category.findOne({ _id: req.params.categoryId }).select('_id description user_id title for_rent rent_price phone_number shop_address shop_name discount discount_from discount_to price category sizes createdAt images').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -138,30 +143,49 @@ function getForRent(req, res, next) {
 
 function uploadImages(req, res, next) {
   Post.findOne({ _id: req.body.post_id }).exec().then((data) => {
-    const files = req.files;
-    const file = files['file'];
-    const fileLinks = '';
+    const files = req.files
+    const images = files['images'];
+    console.log('=====IMAGES=====', images)
+    var imagesArray = [];
 
-    file.forEach(file => {
-      const filename = `${data._id}${file.name}.jpg`;
-      fs.writeFile(`${config.basePath}/public/profile/${filename}`, file.data, function (err) {
-        if (err) {
-          return res.json({
-            success: false,
-            message: "Problem me ngarkim të fotos."
-          })
-        }
+    let imagePromises = new Promise((resolve, reject) => {
+      if (Array.isArray(images)) {
+        images.forEach((file, index, array) => {
+          const filename = `${Date.now()}${Math.random()}.jpg`;
+          fs.writeFile(`${config.basePath}/public/profile/${filename}`, file.data, function (err) {
+            if (err) {
+              return false
+            }
+          });
+          var photo = `${config.domain}/profile/${filename}`;
+          imagesArray.push({ photo })
 
+          if (index === array.length - 1) resolve();
+        })
+      } else {
+        const filename = `${Date.now()}${Math.random()}.jpg`;
+        fs.writeFile(`${config.basePath}/public/profile/${filename}`, images.data, function (err) {
+          if (err) {
+            return false
+          }
+        });
         var photo = `${config.domain}/profile/${filename}`;
-        console.log('====PHOTO====', photo)
-        if (fileLinks === '') {
-          fileLinks = photo;
-        } else {
-          fileLinks = `${fileLinks},${photo}`
-        }
-      });
+        imagesArray.push({ photo })
+        resolve();
+      }
     })
-    res.json({ success: true, data: fileLinks })
+
+    data.images = imagesArray;
+
+    imagePromises.then(() => {
+      data.save()
+        .then((savedPost) => {
+          res.json({ success: true, data: savedPost })
+        })
+        .catch(e => {
+          res.json({ success: false, message: "Unable to update the Post." })
+        })
+    })
   }).catch(e => {
     const err = new APIError(e.message, httpStatus.METHOD_NOT_ALLOWED, true);
     next(err);
