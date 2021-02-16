@@ -23,6 +23,9 @@ router.route('/for-rent')
 router.route('/upload')
     .patch(postCtrl.uploadImages)
 
+    router.route('/update-images')
+        .patch(postCtrl.updateImages)
+
 router.route('/user/:userId')
     .get(expressJwt({ secret: config.jwtSecret }), postCtrl.getAllMyPosts)
 
