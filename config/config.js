@@ -41,7 +41,7 @@ const config = {
   },
   salt: envVars.PASSWORD_SALT,
   basePath: __dirname + '/..',
-  domain: 'http://localhost:5000'
+  domain: 'http://localhost:4040'
 };
 
 module.exports = config;

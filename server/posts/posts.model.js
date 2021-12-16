@@ -52,14 +52,13 @@ const PostSchema = new mongoose.Schema({
     default: 0
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    required: false
+    type: String,
+    required: true
   },
   sizes: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "Size",
-    required: false
+    type: [String],
+    required: true,
+    default: []
   },
   createdAt: {
     type: Date,

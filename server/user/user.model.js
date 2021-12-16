@@ -20,9 +20,8 @@ const UserSchema = new mongoose.Schema({
     required: false,
   },
   city: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'City',
-    required: false,
+    type: String,
+    required: false
   },
   birthday: {
     type: Date,

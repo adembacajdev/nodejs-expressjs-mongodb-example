@@ -33,7 +33,7 @@ function updateOne(req, res, next) {
 }
 
 function deleteOne(req, res, next) {
-  Favourite.findOneAndRemove({ _id: req.params.favouriteId }).then(data => {
+  Favourite.findOneAndRemove({ post_id: req.params.favouriteId }).then(data => {
     if (data) res.json({ success: true, message: "Të dhënat u fshinë me sukses." });
     else res.json({ success: false, message: "Rekordi nuk ekzistion." });
   })
