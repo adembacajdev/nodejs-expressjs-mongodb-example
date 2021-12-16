@@ -38,12 +38,12 @@ function updateOne(req, res, next) {
   Post.findOne({ _id: req.params.postId }).exec().then((data) => {
     data.title = req.body.title ? req.body.title : data.title;
     data.description = req.body.description ? req.body.description : data.description;
-    data.for_rent = req.body.for_rent ? req.body.for_rent : data.for_rent;
+    data.for_rent = req.body.for_rent;
     data.rent_price = req.body.rent_price ? req.body.rent_price : data.rent_price;
     data.phone_number = req.body.phone_number ? req.body.phone_number : data.phone_number;
     data.shop_address = req.body.shop_address ? req.body.shop_address : data.shop_address;
     data.shop_name = req.body.shop_name ? req.body.shop_name : data.shop_name;
-    data.discount = req.body.discount ? req.body.discount : data.discount;
+    data.discount = req.body.discount;
     data.discount_from = req.body.discount_from ? req.body.discount_from : data.discount_from;
     data.discount_to = req.body.discount_to ? req.body.discount_to : data.discount_to;
     data.price = req.body.price ? req.body.price : data.price;
@@ -72,7 +72,7 @@ function deleteOne(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  Post.find().select('_id user_id title description price images for_rent rent_price discount sizes category').lean().exec().then((data) => {
+  Post.find().select('_id user_id title description price images for_rent rent_price discount sizes category discount discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -82,7 +82,7 @@ function getAll(req, res, next) {
 }
 
 function getAllPostsByCategory(req, res, next) {
-  Post.find({ category: req.params.categoryId }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find({ category: req.params.categoryId }).select('_id user_id title description price images for_rent rent_price discount sizes discount discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -92,7 +92,7 @@ function getAllPostsByCategory(req, res, next) {
 }
 
 function getAllMyPosts(req, res, next) {
-  Post.find({ user_id: req.params.userId }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find({ user_id: req.params.userId }).select('_id user_id title description price images for_rent rent_price discount sizes discount discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -112,7 +112,7 @@ function getOne(req, res, next) {
 }
 
 function getDiscounts(req, res, next) {
-  Post.find({ discount: true }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find({ discount: true }).select('_id user_id title description price images for_rent rent_price discount sizes discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -122,7 +122,7 @@ function getDiscounts(req, res, next) {
 }
 
 function getNewArrives(req, res, next) {
-  Post.find().sort({ _id: -1 }).limit(6).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find().sort({ _id: -1 }).limit(6).select('_id user_id title description price images for_rent rent_price discount sizes discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -132,7 +132,7 @@ function getNewArrives(req, res, next) {
 }
 
 function getForRent(req, res, next) {
-  Post.find({ for_rent: true }).select('_id user_id title description price images for_rent rent_price discount sizes').lean().exec().then((data) => {
+  Post.find({ for_rent: true }).select('_id user_id title description price images for_rent rent_price discount sizes discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
