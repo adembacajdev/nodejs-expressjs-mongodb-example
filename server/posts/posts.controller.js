@@ -72,7 +72,7 @@ function deleteOne(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  Post.find().select('_id user_id title description price images for_rent rent_price discount sizes category discount discount_from discount_to').lean().exec().then((data) => {
+  Post.find().sort({ _id: -1 }).select('_id user_id title description price images for_rent rent_price discount sizes category discount discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -82,7 +82,7 @@ function getAll(req, res, next) {
 }
 
 function getAllPostsByCategory(req, res, next) {
-  Post.find({ category: req.params.categoryId }).select('_id user_id title description price images for_rent rent_price discount sizes discount discount_from discount_to').lean().exec().then((data) => {
+  Post.find({ category: req.params.categoryId }).sort({ _id: -1 }).select('_id user_id title description price images for_rent rent_price discount sizes discount discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -92,7 +92,7 @@ function getAllPostsByCategory(req, res, next) {
 }
 
 function getAllMyPosts(req, res, next) {
-  Post.find({ user_id: req.params.userId }).select('_id user_id title description price images for_rent rent_price discount sizes discount discount_from discount_to').lean().exec().then((data) => {
+  Post.find({ user_id: req.params.userId }).sort({ _id: -1 }).select('_id user_id title description price images for_rent rent_price discount sizes discount discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -112,7 +112,7 @@ function getOne(req, res, next) {
 }
 
 function getDiscounts(req, res, next) {
-  Post.find({ discount: true }).select('_id user_id title description price images for_rent rent_price discount sizes discount_from discount_to').lean().exec().then((data) => {
+  Post.find({ discount: true }).sort({ _id: -1 }).select('_id user_id title description price images for_rent rent_price discount sizes discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
@@ -132,7 +132,7 @@ function getNewArrives(req, res, next) {
 }
 
 function getForRent(req, res, next) {
-  Post.find({ for_rent: true }).select('_id user_id title description price images for_rent rent_price discount sizes discount_from discount_to').lean().exec().then((data) => {
+  Post.find({ for_rent: true }).sort({ _id: -1 }).select('_id user_id title description price images for_rent rent_price discount sizes discount_from discount_to').lean().exec().then((data) => {
     res.json({ success: true, data })
   })
     .catch(e => {
