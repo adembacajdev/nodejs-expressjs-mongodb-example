@@ -48,7 +48,7 @@ function updateOne(req, res, next) {
     data.discount_to = req.body.discount_to ? req.body.discount_to : data.discount_to;
     data.price = req.body.price ? req.body.price : data.price;
     data.category = req.body.category ? req.body.category : data.category;
-    data.sizes = req.body.size ? req.body.sizes : data.sizes;
+    data.sizes = req.body.sizes ? req.body.sizes : data.sizes;
     data.images = req.body.images ? req.body.images : data.images
     data.save()
       .then((savedPost) => {
